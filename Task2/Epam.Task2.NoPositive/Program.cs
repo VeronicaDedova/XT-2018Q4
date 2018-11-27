@@ -4,14 +4,14 @@ namespace Epam.Task2.NoPositive
 {
     public class Program
     {
-        public static void ArrayFill(int[,,] arr, int arrayLength)
+        public static void ArrayFill(int[,,] arr)
         {
             Random rand = new Random();
-            for (int i = 0; i < arrayLength; i++)
+            for (int i = 0; i < arr.GetLength(0); i++)
             {
-                for (int j = 0; j < arrayLength; j++)
+                for (int j = 0; j < arr.GetLength(1); j++)
                 {
-                    for (int k = 0; k < arrayLength; k++)
+                    for (int k = 0; k < arr.GetLength(2); k++)
                     {
                         arr[i, j, k] = rand.Next(-100, 100);
                     }
@@ -19,13 +19,13 @@ namespace Epam.Task2.NoPositive
             }
         }
 
-        public static void ArrayOutput(int[,,] arr, int arrayLength)
+        public static void ArrayOutput(int[,,] arr)
         {
-            for (int i = 0; i < arrayLength; i++)
+            for (int i = 0; i < arr.GetLength(0); i++)
             {
-                for (int j = 0; j < arrayLength; j++)
+                for (int j = 0; j < arr.GetLength(1); j++)
                 {
-                    for (int k = 0; k < arrayLength; k++)
+                    for (int k = 0; k < arr.GetLength(2); k++)
                     {
                         Console.Write($"{arr[i, j, k]} ");
                     }
@@ -39,13 +39,13 @@ namespace Epam.Task2.NoPositive
             Console.WriteLine();
         }
 
-        public static void NoPositive(int[,,] arr, int arrayLength)
+        public static void NoPositive(int[,,] arr)
         {
-            for (int i = 0; i < arrayLength; i++)
+            for (int i = 0; i < arr.GetLength(0); i++)
             {
-                for (int j = 0; j < arrayLength; j++)
+                for (int j = 0; j < arr.GetLength(1); j++)
                 {
-                    for (int k = 0; k < arrayLength; k++)
+                    for (int k = 0; k < arr.GetLength(2); k++)
                     {
                         if (arr[i, j, k] > 0)
                         {
@@ -64,11 +64,11 @@ namespace Epam.Task2.NoPositive
             {
                 int[,,] arr = new int[arrayLength, arrayLength, arrayLength];
                 Console.WriteLine("Original array: ");
-                ArrayFill(arr, arrayLength);
-                ArrayOutput(arr, arrayLength);
+                ArrayFill(arr);
+                ArrayOutput(arr);
                 Console.WriteLine("An array in which positive numbers are replaced by zeros:");
-                NoPositive(arr, arrayLength);
-                ArrayOutput(arr, arrayLength);
+                NoPositive(arr);
+                ArrayOutput(arr);
             }
             else
             {

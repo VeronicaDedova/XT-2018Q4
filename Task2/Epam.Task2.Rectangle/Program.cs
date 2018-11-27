@@ -13,16 +13,30 @@ namespace Epam.Task2.Rectangle
         {
             int a = 0;
             int b = 0;
+            int count = 0;
 
+            Console.WriteLine("Enter the lengths of the sides of the rectangle:");
             do
             {
-                Console.WriteLine("Enter the lengths of the sides of the rectangle:");
-                Console.Write("a = ");
+                count++;
+                if (count > 1)
+                {
+                    Console.WriteLine("Incorrect input. The number must be an integer.");
+                }
+
+                Console.Write("a = ");                
             }
             while (!int.TryParse(Console.ReadLine(), out a));
+            count = 0;
 
             do
             {
+                count++;
+                if (count > 1)
+                {
+                    Console.WriteLine("Incorrect input. The number must be an integer.");
+                }
+
                 Console.Write("b = ");
             }
             while (!int.TryParse(Console.ReadLine(), out b));

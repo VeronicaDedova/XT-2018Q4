@@ -4,15 +4,6 @@ namespace Epam.Task2.FontAdjustment
 {
     public class Program
     {
-        [Flags]
-        public enum FontAdjustment
-        {
-            none,
-            bold,
-            italic,
-            underline = 4,
-        }
-
         public static void Main(string[] args)
         {
             var font = FontAdjustment.none;
