@@ -2,17 +2,16 @@
 
 namespace Epam.Task1.Simple
 {
-    class Program
+    public class Program
     {
-        static void Simple(int n)
+        public static void Simple(int n)
         {
             int count = 0;
-            
+
             if ((n == 0) || (n == 1))
             {
                 Console.WriteLine("The number is NOT simple");
             }
-            
             else
             {
                 for (int i = 2; i <= Math.Sqrt(n); i++)
@@ -21,33 +20,31 @@ namespace Epam.Task1.Simple
                     {
                         count++;
                         break;
-                    }                    
+                    }
                 }
-                
+
                 if (count != 0)
                 {
                     Console.WriteLine("The number is NOT simple");
                 }
-                
                 else
                 {
                     Console.WriteLine("The number is simple");
                 }
-                
-            }                
+            }
         }
-        static void Main(string[] args)
+
+        public static void Main(string[] args)
         {
             int n = 0;
-            
+
             Console.WriteLine("Enter the number:");
-            String input = Console.ReadLine();
-            
-            if (Int32.TryParse(input, out n))
+            string input = Console.ReadLine();
+
+            if (int.TryParse(input, out n))
             {
                 Simple(n);
             }
-            
             else
             {
                 Console.WriteLine("Incorrect input");

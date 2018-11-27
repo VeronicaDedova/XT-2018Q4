@@ -2,33 +2,32 @@
 
 namespace Epam.Task1.Sequence
 {
-    class Program
+    public class Program
     {
-        static void Sequence(int n)
+        public static void Sequence(int n)
         {
-            for (int i = 1; i < n+1; i++)
+            for (int i = 1; i < n + 1; i++)
             {
                 Console.Write(i + " ");
-            }
-            
+            }            
         }
-        static void Main(string[] args)
+
+        public static void Main(string[] args)
         {
             int n = 0;
-            
+
             Console.WriteLine("Enter the length of sequence:");
-            String input = Console.ReadLine();
-            
-            if (Int32.TryParse(input, out n))
+            string input = Console.ReadLine();
+
+            if (int.TryParse(input, out n))
             {
                 Sequence(n);
+                Console.WriteLine();
             }
-            
             else
             {
                 Console.WriteLine("Incorrect input");
-            }
-            
+            }                
         }
     }
 }
