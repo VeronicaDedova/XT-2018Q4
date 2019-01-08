@@ -96,7 +96,7 @@ namespace Epam.Task7.UsersAndAwards.Entities
             get
             {
                 int age = DateTime.Now.Year - this.DateOfBirth.Year;
-                if ((DateTime.Now.Month <= this.DateOfBirth.Month) && (DateTime.Now.Day < this.DateOfBirth.Day))
+                if ((DateTime.Now.Month < this.DateOfBirth.Month) || (DateTime.Now.Month == this.DateOfBirth.Month && (DateTime.Now.Day < this.DateOfBirth.Day)))
                 {
                     age--;
                 }

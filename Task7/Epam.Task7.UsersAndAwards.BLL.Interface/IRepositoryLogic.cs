@@ -12,7 +12,6 @@ namespace Epam.Task7.UsersAndAwards.BLL.Interface
 
         void Delete(int id);
 
-        // void Update(T item);
         T GetById(int id);
 
         IEnumerable<T> GetAll();

@@ -28,10 +28,6 @@ namespace Epam.Task7.UsersAndAwards.BLL
             this.userDao.Delete(id);
         }
 
-        // public void Update(User user)
-        // {
-        //     this.userDao.Update(user);
-        // }
         public User GetById(int id)
         {
             return this.userDao.GetById(id);

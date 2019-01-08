@@ -12,7 +12,6 @@ namespace Epam.Task7.UsersAndAwards.DAL.Interface
 
         bool Delete(int id);
 
-        // bool Update(T item);
         T GetById(int id);
 
         IEnumerable<T> GetAll();

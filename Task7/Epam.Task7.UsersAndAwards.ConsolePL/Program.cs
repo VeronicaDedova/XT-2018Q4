@@ -13,11 +13,100 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
     {
         public static void Main(string[] args)
         {
-            var userLogic = DependencyResolver.UserLogic;
-            Console.WriteLine($"This application allows you to work with a list of users. What do you want to do? {Environment.NewLine}Enter the appropriate number + 'enter'");
+            Console.Clear();
             do
             {
-                Console.WriteLine($"1.Add user.{Environment.NewLine}2.Delete user.{Environment.NewLine}3.View user by id.{Environment.NewLine}4.View all users{Environment.NewLine}Press any other key to quit");
+                Console.WriteLine($"{Environment.NewLine}Do you want to work with the list of users or with the list of awards? (1/2)" +
+                    $"{Environment.NewLine}1.list of users" +
+                    $"{Environment.NewLine}2.list of awards");
+
+                var listOf = Console.ReadKey().Key;
+                if (listOf == ConsoleKey.D1)
+                {
+                    WorkWithUsers();
+                }
+                else if (listOf == ConsoleKey.D2)
+                {
+                    WorkWithAwards();
+                }
+
+                Console.WriteLine($"{Environment.NewLine}Choose a different mode of operation? (y/n)");
+            }
+            while (Console.ReadKey().Key == ConsoleKey.Y);
+        }
+
+        private static void WorkWithAwards()
+        {
+            var awardLogic = DependencyResolver.AwardLogic;
+
+            Console.Clear();
+
+            Console.WriteLine($"{Environment.NewLine}This application allows you to work with a list of awards." +
+                $"{Environment.NewLine}What do you want to do? " +
+                $"{Environment.NewLine}Enter the appropriate number + 'enter'");
+            do
+            {
+                Console.WriteLine($"{Environment.NewLine}1.Add award." +
+                    $"{Environment.NewLine}2.Delete award." +
+                    $"{Environment.NewLine}3.View award by id." +
+                    $"{Environment.NewLine}4.View all awards" +
+                    $"{Environment.NewLine}Press any other key to quit");
+
+                var key = Console.ReadKey().Key;
+                if (key == ConsoleKey.D1)
+                {
+                    do
+                    {
+                        AddAward(awardLogic);
+                        Console.WriteLine("Add another award? (y/n)");
+                    }
+                    while (Console.ReadKey().Key == ConsoleKey.Y);
+                }
+                else if (key == ConsoleKey.D2)
+                {
+                    do
+                    {
+                        DeleteAward(awardLogic);
+                        Console.WriteLine("Delete another award? (y/n)");
+                    }
+                    while (Console.ReadKey().Key == ConsoleKey.Y);
+                }
+                else if (key == ConsoleKey.D3)
+                {
+                    do
+                    {
+                        ShowAwardByID(awardLogic);
+                        Console.WriteLine("View another id? (y/n)");
+                    }
+                    while (Console.ReadKey().Key == ConsoleKey.Y);
+                }
+                else if (key == ConsoleKey.D4)
+                {
+                    ShowAwards(awardLogic);
+                }
+
+                Console.WriteLine($"{Environment.NewLine}Do another action with users? (y/n)");
+            }
+            while (Console.ReadKey().Key == ConsoleKey.Y);
+        }
+
+        private static void WorkWithUsers()
+        {
+            var userLogic = DependencyResolver.UserLogic;
+
+            Console.Clear();
+
+            Console.WriteLine($"{Environment.NewLine}This application allows you to work with a list of users." +
+                $"{Environment.NewLine}What do you want to do? " +
+                $"{Environment.NewLine}Enter the appropriate number + 'enter'");
+            do
+            {
+                Console.WriteLine($"{Environment.NewLine}1.Add user." +
+                    $"{Environment.NewLine}2.Delete user." +
+                    $"{Environment.NewLine}3.View user by id." +
+                    $"{Environment.NewLine}4.View all users" +
+                    $"{Environment.NewLine}Press any other key to quit");
+
                 var key = Console.ReadKey().Key;
                 if (key == ConsoleKey.D1)
                 {
@@ -49,16 +138,16 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
                 else if (key == ConsoleKey.D4)
                 {
                     ShowUsers(userLogic);
-                }                
+                }
 
-                Console.WriteLine("Do another action with users? (y/n)");
+                Console.WriteLine($"{Environment.NewLine}Do another action with users? (y/n)");
             }
             while (Console.ReadKey().Key == ConsoleKey.Y);
         }
 
         private static void AddUser(IRepositoryLogic<User> userLogic)
         {
-            Console.WriteLine("Enter the information about user.");
+            Console.WriteLine($"{Environment.NewLine}Enter the information about user.");
             Console.Write("First name: ");
             string firstName = Console.ReadLine();
             Console.Write("Last name: ");
@@ -75,29 +164,59 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
 
         private static void DeleteUser(IRepositoryLogic<User> userLogic)
         {
-            Console.WriteLine("Enter ID deleted user.");
+            Console.WriteLine($"{Environment.NewLine}Enter ID deleted user.");
             int id = int.Parse(Console.ReadLine());
             userLogic.Delete(id);
         }
 
-        // private static void UpdateUser(IRepositoryLogic<User> userLogic)
-        // {
-        //     userLogic.Update(user);
-        // }
         private static void ShowUserByID(IRepositoryLogic<User> userLogic)
         {
-            Console.WriteLine("Enter user ID.");
+            Console.WriteLine($"{Environment.NewLine}Enter user ID.");
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine(userLogic.GetById(id));
         }
 
         private static void ShowUsers(IRepositoryLogic<User> userLogic)
         {
-            // Console.WriteLine("Id FirstName LastName Patronymic DateOfBirth Age");
+            Console.WriteLine();
             foreach (var user in userLogic.GetAll())
             {
                 Console.WriteLine(user);
             }
-        }   
+        }
+
+        private static void ShowAwards(IRepositoryLogic<Award> awardLogic)
+        {
+            Console.WriteLine();
+            foreach (var award in awardLogic.GetAll())
+            {
+                Console.WriteLine(award);
+            }
+        }
+
+        private static void ShowAwardByID(IRepositoryLogic<Award> awardLogic)
+        {
+            Console.WriteLine($"{Environment.NewLine}Enter award ID.");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine(awardLogic.GetById(id));
+        }
+
+        private static void DeleteAward(IRepositoryLogic<Award> awardLogic)
+        {
+            Console.WriteLine($"{Environment.NewLine}Enter ID deleted award.");
+            int id = int.Parse(Console.ReadLine());
+            awardLogic.Delete(id);
+        }
+
+        private static void AddAward(IRepositoryLogic<Award> awardLogic)
+        {
+            Console.WriteLine($"{Environment.NewLine}Enter the information about award.");
+            Console.Write("Title: ");
+            string title = Console.ReadLine();
+
+            var award = new Award(title);
+
+            awardLogic.Add(award);
+        }
     }
 }

@@ -36,15 +36,6 @@ namespace Epam.Task7.UsersAndAwards.DAL
             return true;
         }
 
-        // public bool Update(User user)
-        // {
-        //     if (!repositoryUsers.ContainsKey(user.Id))
-        //     {
-        //         return false;
-        //     }
-        //     repositoryUsers[user.Id] = user;
-        //     return true;
-        // }
         public User GetById(int id)
         {
             if (RepositoryUsers.TryGetValue(id, out var user))
