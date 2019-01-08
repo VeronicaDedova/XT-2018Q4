@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Epam.Task7.UsersAndAwards.DAL.Interface
+{
+    public interface IRepositoryDAO<T> where T : class
+    {
+        void Add(T item);
+
+        bool Delete(int id);
+
+        // bool Update(T item);
+        T GetById(int id);
+
+        IEnumerable<T> GetAll();
+    }
+}
