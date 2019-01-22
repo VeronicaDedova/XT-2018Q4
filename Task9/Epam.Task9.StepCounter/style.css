@@ -1,0 +1,39 @@
+label, div{
+    margin-left: 0px;
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    background: linear-gradient(to bottom, #DADADA 20%, #aaa 50%, #DADADA 80%, #DADADA 100%);
+    text-align: center;
+    line-height: 30px;
+    font-family: sans-serif;
+    font-size: 12pt;
+}
+div::after, div::before{
+    content: "";
+    position: absolute;
+    right: -24px;
+    top: 0%;
+    display: block;
+    height: 0px;
+    width: 0px;
+    border: 15px solid transparent;
+    border-left: 10px solid #bbbbbb;
+    z-index:3;
+}
+input{
+    display:none;
+}
+input:checked+div{
+    background:linear-gradient(to bottom, #AAE083 20%, #64C51E 50%, #AAE083 80%);;
+    color:#ffffff; 
+}
+input:checked + div::after{
+    border-left-color:#AAE083;
+}
+div::before, label:last-child div::after{
+    border-left-color:#ffffff;
+    right:-28px;
+    z-index: 2;
+}

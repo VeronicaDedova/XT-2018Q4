@@ -1,0 +1,62 @@
+body{
+    background-color: #4E6379;
+}
+.hosting{
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    width: 750px;
+    height: 200px;
+    box-shadow: 3px 20px 30px 5px #303D4B;
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+td{
+    width: 750px;
+    height: 150px;
+    border: 1px solid #d6d6d6;
+}
+table{
+    border-collapse: collapse;
+    border: 2px solid white;
+    margin-top: 20px;
+}
+button{
+    background-color: #F56332;
+    color: #FFFFFF;
+    border-radius: 3px;
+    padding: 3%;
+    border: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+p{
+    font-family: Verdana;
+    font-size: 10pt;
+}
+.head{
+    font-size: 13pt;
+    color: #F56536;    
+}
+
+.virtual .pic{
+    width: 62px;
+    height: 42px;
+    margin: auto;
+    background: url(http://htmlbook.ru/files/hosting.png);
+}
+.cloud .pic{
+    width: 62px;
+    height: 42px;
+    margin: auto;
+    background: url(http://htmlbook.ru/files/hosting.png);
+    background-position: 0 -43px;
+}
+.server .pic{
+    width: 62px;
+    height: 41px;
+    margin: auto;
+    background: url(http://htmlbook.ru/files/hosting.png);
+    background-position: 0 -84px;
+}

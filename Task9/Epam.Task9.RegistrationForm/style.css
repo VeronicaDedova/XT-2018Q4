@@ -1,0 +1,51 @@
+form{
+    width: 320px;
+    background-color: #0690CF;
+    border: 3px solid #03719F;
+    color: #ffffff;
+    font-family: sans-serif;
+}
+hr{
+    background: #ffffff;
+    height: 0.5pt;   
+    border: 0;
+}
+.formheader p{
+    font-size: 14pt;
+    margin: 15px 18px 10px;    
+}
+.email p{
+    font-size: 10pt;
+    margin: 23px 18px 3px; 
+}
+.email input{
+    width: 250px;
+    margin: 0px 18px 0px; 
+}
+.password input{
+    width: 115px; 
+    margin: 3px 0px;
+}
+.password p{
+    margin: 0;
+}
+.password .left{
+    float: left;
+    display: block;
+    font-size: 10pt;
+    margin: 18px 0px 0px 18px;     
+}
+.password .right{
+    float: right;
+    display: block;
+    font-size: 10pt;
+    margin: 18px 46px 0px 16px;     
+}
+.button input{
+    margin: 15px 18px 0px; 
+    background-color: #FFDF7F;
+    border: none;
+    width: 62 px;
+    height: 20px;
+    font-size: 8pt;
+}
