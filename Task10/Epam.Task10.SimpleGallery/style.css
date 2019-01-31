@@ -1,0 +1,14 @@
+.pic img{
+    width: 30%;
+    height: 30%;
+}
+div{
+    text-align: center;
+}
+.buttons img{
+    width: 64px;
+    height: 64px;
+}
+.timer{
+    font-size: 20pt;
+}
