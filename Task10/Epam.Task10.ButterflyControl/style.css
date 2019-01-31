@@ -1,0 +1,16 @@
+select{
+    width: 130px;    
+}
+h3{
+    margin: 0;
+    text-align: center;
+}
+div{
+    display: inline-block;
+    vertical-align: bottom;
+}
+.buttons button{
+    width: 30px; 
+    height: 30px;
+    padding: 0;    
+}

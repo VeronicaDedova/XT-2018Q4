@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Butterfly control</title>
+</head>
+<body>
+    <form>
+        <div class="select">
+            <h3>Available</h3>
+            <select id="available"size="8" multiple>
+                <option id="id1">Option 1</option>
+                <option id="id2">Option 2</option>
+                <option id="id3">Option 3</option>
+                <option id="id4">Option 4</option>
+                <option id="id5">Option 5</option>
+            </select>
+        </div>
+        <div class="buttons">
+            <button id="allToRight" onclick="allRight(); return false"> >> </button><br>
+            <button id="oneToRight" onclick="oneRight(); return false"> > </button><br>
+            <button id="oneToLeft" onclick="oneLeft(); return false"> < </button><br>
+            <button id="allToLeft" onclick="allLeft(); return false"> << </button><br>
+        </div>
+        <div class="select">
+                <h3>Selected</h3>
+                <select id="selected" size="8" multiple>
+                </select>
+            </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Char remover</title>
+</head>
+<body>
+    <form>
+        <p>Будут удалены все символы, 
+            повторяющиеся хоть в одном из слов более одного раза</p>
+        <input type="text" id="input">
+        <input type="submit" value="Удалить" id="submit" onclick="removeChars(); return false">
+        <p>Результат: <span id="res"></span></p>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>
