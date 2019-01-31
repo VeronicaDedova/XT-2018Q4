@@ -36,7 +36,7 @@ function startTimer(){
 }
 
 function toPreviousPage(){
-    var previousPage = document.getElementById("previous").getAttribute("href");
+    var previousPage = document.getElementById("previousid").getAttribute("href");
     if(previousPage == ""){
         alert('Это первая страница.');
     }
@@ -46,7 +46,7 @@ function toPreviousPage(){
 }
 
 function pause(){
-    clearTimeout(timeout);
+    clearInterval(timeout);
 }
 
 function play(){
