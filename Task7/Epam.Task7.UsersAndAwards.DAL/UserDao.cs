@@ -13,7 +13,7 @@ namespace Epam.Task7.UsersAndAwards.DAL
     {
         private const string UsersFile = "users.txt";
 
-        private static readonly string Path = Environment.CurrentDirectory + @"\usersAndAwards\";
+        private static readonly string Path = Environment.CurrentDirectory + @"\..\..\usersAndAwards\";
 
         private static readonly Dictionary<int, User> RepositoryUsers = FileWithUsers();
 

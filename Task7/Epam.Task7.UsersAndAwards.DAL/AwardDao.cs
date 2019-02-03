@@ -12,7 +12,7 @@ namespace Epam.Task7.UsersAndAwards.DAL
     public class AwardDao : IRepositoryDAO<Award>
     {
         private const string AwardsFile = "awards.txt";
-        private static readonly string Path = Environment.CurrentDirectory + @"\usersAndAwards\" + AwardsFile;
+        private static readonly string Path = Environment.CurrentDirectory + @"\..\..\usersAndAwards\" + AwardsFile;
 
         private static readonly Dictionary<int, Award> RepositoryAwards = FileWithAwards();
 
