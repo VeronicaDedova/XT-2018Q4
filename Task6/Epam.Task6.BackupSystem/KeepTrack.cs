@@ -10,7 +10,7 @@ namespace Epam.Task6.BackupSystem
 
         public static void Run()
         {
-            string path = Environment.CurrentDirectory + @"\TestFolder";
+            string path = Environment.CurrentDirectory + @"\..\..\TestFolder";
             Console.WriteLine($"{Environment.NewLine}Watch for changes in the folder {path}");          
 
             watcher.Path = path;
@@ -33,7 +33,7 @@ namespace Epam.Task6.BackupSystem
             }
         }
 
-        public static string GenerateName(FileSystemEventArgs e)
+        public static string GenerateName(FileSystemEventArgs e, string typeAction)
         {
             string dateTime = $"{DateTime.Now}".Replace(':', '.');
             string path = e.FullPath.Replace("TestFolder", "backups");
@@ -41,7 +41,7 @@ namespace Epam.Task6.BackupSystem
             Directory.CreateDirectory(path);
             Directory.Delete(path);
 
-            return path.Replace(".txt", $" {dateTime}.txt");
+            return path.Replace(".txt", $" {typeAction}.{dateTime}.txt");
         }
 
         private static void OnRenamed(object sender, RenamedEventArgs e)
@@ -53,7 +53,7 @@ namespace Epam.Task6.BackupSystem
                 sw.WriteLine($"Date: {DateTime.Now}{Environment.NewLine}File: {e.OldFullPath}{Environment.NewLine}renamed to {e.FullPath}{Environment.NewLine}");
             }
 
-            File.Copy(e.FullPath, GenerateName(e), false);
+            File.Copy(e.FullPath, GenerateName(e, "Renamed"), false);
         }
 
         private static void OnDelete(object sender, FileSystemEventArgs e)
@@ -79,7 +79,7 @@ namespace Epam.Task6.BackupSystem
                     sw.WriteLine($"Date: {DateTime.Now}{Environment.NewLine}New File is: {e.Name}{Environment.NewLine}And type: {e.ChangeType}{Environment.NewLine}Path of file: {e.FullPath}{Environment.NewLine}");
                 }
 
-                File.Copy(e.FullPath, GenerateName(e), false);
+                File.Copy(e.FullPath, GenerateName(e, "Created"), false);
             }
             finally
             {

@@ -11,14 +11,18 @@ namespace Epam.Task6.BackupSystem
     {
         public static void Run()
         {
-            DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory + @"\TestFolder");
+            DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory + @"\..\..\TestFolder");
 
             foreach (FileInfo f in dirInfo.GetFiles())
             {
                 f.Delete();
             }
 
-            
+            var files = dirInfo.GetFiles();
+            foreach (var item in files)
+            {
+
+            }
         }
     }
 }
