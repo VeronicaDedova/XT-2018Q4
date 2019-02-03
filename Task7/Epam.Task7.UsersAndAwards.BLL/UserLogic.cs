@@ -33,6 +33,11 @@ namespace Epam.Task7.UsersAndAwards.BLL
             return this.userDao.GetById(id);
         }
 
+        public bool TryGetId(int id)
+        {
+            return this.userDao.TryGetId(id);
+        }
+
         public IEnumerable<User> GetAll()
         {
             return this.userDao.GetAll();

@@ -51,6 +51,21 @@ namespace Epam.Task7.UsersAndAwards.DAL
             return null;
         }
 
+        public bool TryGetId(int id)
+        {
+            if (RepositoryAwards.TryGetValue(id, out var awards))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void GiveAward(int idU, int idA)
+        {
+            throw new NotImplementedException();
+        }
+
         private static Dictionary<int, Award> FileWithAwards()
         {
             Dictionary<int, Award> repositoryAwards = new Dictionary<int, Award>();
@@ -59,10 +74,12 @@ namespace Epam.Task7.UsersAndAwards.DAL
             var lines = File.ReadAllLines(Path);
             foreach (var line in lines)
             {
-                string title = line.Split(' ')[1];
-                
+                int id = int.Parse(line.Split(' ')[0]);
+                string title = line.Substring(line.IndexOf(' '));
+
                 award = new Award
                 {
+                    Id = id,
                     Title = title,
                 };
 

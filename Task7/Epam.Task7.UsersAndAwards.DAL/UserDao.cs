@@ -12,7 +12,8 @@ namespace Epam.Task7.UsersAndAwards.DAL
     public class UserDao : IRepositoryDAO<User>
     {
         private const string UsersFile = "users.txt";
-        private static readonly string Path = Environment.CurrentDirectory + @"\usersAndAwards\" + UsersFile;
+
+        private static readonly string Path = Environment.CurrentDirectory + @"\usersAndAwards\";
 
         private static readonly Dictionary<int, User> RepositoryUsers = FileWithUsers();
 
@@ -24,7 +25,7 @@ namespace Epam.Task7.UsersAndAwards.DAL
 
             user.Id = ++lastId;
             RepositoryUsers.Add(user.Id, user);
-            File.AppendAllLines(Path, new[] { user.ToString() });
+            File.AppendAllLines(Path + UsersFile, new[] { user.ToString() });
         }
 
         public bool Delete(int id)
@@ -32,7 +33,7 @@ namespace Epam.Task7.UsersAndAwards.DAL
             RepositoryUsers.Remove(id);
 
             var afterDelet = RepositoryUsers.Values.Select(x => x.ToString()).ToArray();
-            File.WriteAllLines(Path, afterDelet);
+            File.WriteAllLines(Path + UsersFile, afterDelet);
             return true;
         }
 
@@ -46,9 +47,34 @@ namespace Epam.Task7.UsersAndAwards.DAL
             return null;
         }
 
+        public bool TryGetId(int id)
+        {
+            if (RepositoryUsers.TryGetValue(id, out var user))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public IEnumerable<User> GetAll()
         {
             return RepositoryUsers.Values;
+        }
+
+        public void GiveAward(int idU, int idA)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<User> ListOfUserAwards()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<User> GetAllUsersWithAwards()
+        {
+            throw new NotImplementedException();
         }
 
         private static Dictionary<int, User> FileWithUsers()
@@ -56,9 +82,10 @@ namespace Epam.Task7.UsersAndAwards.DAL
             Dictionary<int, User> repositoryUsers = new Dictionary<int, User>();
             User user;
 
-            var lines = File.ReadAllLines(Path);
+            var lines = File.ReadAllLines(Path + UsersFile);
             foreach (var line in lines)
             {
+                int fid = int.Parse(line.Split(' ')[0]);
                 string ffirstName = line.Split(' ')[1];
                 string flastName = line.Split(' ')[2];
                 string fpatronymic = line.Split(' ')[3];
@@ -66,6 +93,7 @@ namespace Epam.Task7.UsersAndAwards.DAL
 
                 user = new User
                 {
+                    Id = fid,
                     FirstName = ffirstName,
                     LastName = flastName,
                     Patronymic = fpatronymic,

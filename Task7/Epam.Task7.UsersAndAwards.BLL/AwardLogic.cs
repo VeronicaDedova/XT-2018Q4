@@ -37,5 +37,10 @@ namespace Epam.Task7.UsersAndAwards.BLL
         {
             return this.awardDao.GetById(id);
         }
+
+        public bool TryGetId(int id)
+        {
+            return this.awardDao.TryGetId(id);
+        }
     }
 }

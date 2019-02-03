@@ -93,6 +93,8 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
         private static void WorkWithUsers()
         {
             var userLogic = DependencyResolver.UserLogic;
+            var awardLogic = DependencyResolver.AwardLogic;
+            var linkTableLogic = DependencyResolver.LinkTableLogic;
 
             Console.Clear();
 
@@ -105,6 +107,8 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
                     $"{Environment.NewLine}2.Delete user." +
                     $"{Environment.NewLine}3.View user by id." +
                     $"{Environment.NewLine}4.View all users" +
+                    $"{Environment.NewLine}5.Give a reward to the user" +
+                    $"{Environment.NewLine}6.View all users and their awards" +
                     $"{Environment.NewLine}Press any other key to quit");
 
                 var key = Console.ReadKey().Key;
@@ -139,6 +143,14 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
                 {
                     ShowUsers(userLogic);
                 }
+                else if (key == ConsoleKey.D5)
+                {
+                    GiveAwardToUser(linkTableLogic, userLogic, awardLogic);
+                }
+                else if (key == ConsoleKey.D6)
+                {
+                    ShowUsersAndAwards(linkTableLogic, userLogic, awardLogic);
+                }
 
                 Console.WriteLine($"{Environment.NewLine}Do another action with users? (y/n)");
             }
@@ -147,6 +159,8 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
 
         private static void AddUser(IRepositoryLogic<User> userLogic)
         {
+            Console.Clear();
+
             Console.WriteLine($"{Environment.NewLine}Enter the information about user.");
             Console.Write("First name: ");
             string firstName = Console.ReadLine();
@@ -185,11 +199,84 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
             }
         }
 
+        private static void GiveAwardToUser(IRepositoryLogic<LinkTable> linkTableLogic, IRepositoryLogic<User> userLogic, IRepositoryLogic<Award> awardLogic)
+        {
+            Console.Clear();
+
+            var userAward = new LinkTable();
+
+            ShowUsers(userLogic);
+
+            do
+            {
+                Console.WriteLine($"{Environment.NewLine}Enter the ID of the user you want to reward:");
+                if (int.TryParse(Console.ReadLine(), out int idUser))
+                {
+                    if (!userLogic.TryGetId(idUser))
+                    {
+                        Console.WriteLine("No user with this id! Try again?(y/n)");
+                    }
+                    else
+                    {
+                        userAward.IdUser = idUser;
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Id is number! Try again?(y/n)");
+                }
+            }
+            while (Console.ReadKey().Key == ConsoleKey.Y);
+            
+            ShowAwards(awardLogic);
+
+            do
+            {
+                Console.WriteLine($"{Environment.NewLine}Enter the ID of the award:");
+                if (int.TryParse(Console.ReadLine(), out int idAward))
+                {
+                    if (!awardLogic.TryGetId(idAward))
+                    {
+                        Console.WriteLine("No award with this id! Try again?(y/n)");
+                    }
+                    else
+                    {
+                        userAward.IdAward = idAward;
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Id is number! Try again?(y/n)");
+                }
+            }
+            while (Console.ReadKey().Key == ConsoleKey.Y);
+
+            linkTableLogic.Add(userAward);
+        }
+
+        private static void ShowUsersAndAwards(IRepositoryLogic<LinkTable> linkTableLogic, IRepositoryLogic<User> userLogic, IRepositoryLogic<Award> awardLogic)
+        {
+            Console.WriteLine();
+            int idUser;
+            int idAward;
+
+            foreach (var userAndAwards in linkTableLogic.GetAll())
+            {
+                idUser = userAndAwards.IdUser;
+                userLogic.GetById(idUser);
+                Console.WriteLine(userLogic.GetById(idUser));
+                idAward = userAndAwards.IdAward;
+                Console.WriteLine($"\t {awardLogic.GetById(idAward)}"); 
+            }
+        }
+
         private static void ShowAwards(IRepositoryLogic<Award> awardLogic)
         {
             Console.WriteLine();
             foreach (var award in awardLogic.GetAll())
-            {
+            {                
                 Console.WriteLine(award);
             }
         }

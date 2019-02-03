@@ -14,6 +14,8 @@ namespace Epam.Task7.UsersAndAwards.BLL.Interface
 
         T GetById(int id);
 
+        bool TryGetId(int id);
+
         IEnumerable<T> GetAll();
     }
 }
