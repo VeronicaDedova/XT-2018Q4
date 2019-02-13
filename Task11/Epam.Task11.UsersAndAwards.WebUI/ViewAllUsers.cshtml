@@ -1,0 +1,46 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var userLogic = DependencyResolver.UserLogic;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <caption>List of all users</caption>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Patronymic</th>
+                <th>Date of birth</th>
+                <th>Age</th>
+            </tr>
+            @foreach (var user in userLogic.GetAll())
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td><img src="@Epam.Task11.UsersAndAwards.WebUI.Img.GetUserImage(user)" /></td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Patronymic</td>
+                    <td>@user.DateOfBirth.ToShortDateString()</td>
+                    <td>@user.Age</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

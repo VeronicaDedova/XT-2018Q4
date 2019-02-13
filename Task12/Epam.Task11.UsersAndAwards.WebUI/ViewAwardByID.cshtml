@@ -1,0 +1,63 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var awardLogic = DependencyResolver.AwardLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post">
+        <div>
+            <h3>Which award do you want to view?</h3>
+            <p>
+                Enter ID:
+                <input type="number" name="idAward" />
+            </p>
+            <input type="submit" value="Show award" />
+        </div>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    int.TryParse(Request.Params["idAward"], out var idAward);
+    var award = awardLogic.GetById(idAward);
+    if (award != null)
+    {
+        <div>
+            <table border="1">
+                <caption>Award:</caption>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                </tr>
+                <tr>
+                    <td>@award.Id</td>
+                    <td><img src="@Epam.Task11.UsersAndAwards.WebUI.Img.GetAwardImage(award)" /></td>
+                    <td>@award.Title</td>
+                </tr>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div><p>No award with such ID</p></div>
+    }
+}

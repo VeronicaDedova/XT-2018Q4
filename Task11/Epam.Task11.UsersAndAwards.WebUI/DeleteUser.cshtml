@@ -1,0 +1,51 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var userLogic = DependencyResolver.UserLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post">
+        <div>
+            <h3>Which user do you want to delete?</h3>
+            <p>
+                Enter ID deleted user:
+                <input type="number" name="idUser" />
+            </p>
+            <input type="submit" value="Delete user" />
+        </div>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    var idUser = int.Parse(Request.Params["idUser"]);
+
+    if (userLogic.TryGetId(idUser))
+    {
+        userLogic.Delete(idUser);
+        userLogic.DeleteImage(idUser);
+        <script>alert('User successfully deleted');</script>
+    }
+    else
+    {
+        <div><p>No user with such ID</p></div>
+    }
+}

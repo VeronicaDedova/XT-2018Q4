@@ -1,0 +1,1 @@
+﻿function Redirect(path) { window.location = path; }

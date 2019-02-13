@@ -1,0 +1,71 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var userLogic = DependencyResolver.UserLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <div>
+            <h3>About user:</h3>
+            <p>
+                First name:
+                <input type="text" name="firstName" />
+            </p>
+            <p>
+                Last name:
+                <input type="text" name="lastName" />
+            </p>
+            <p>
+                Patronymic:
+                <input type="text" name="patronymic" />
+            </p>
+            <p>
+                Date of birth:
+                <input type="date" name="dateOfBirth" />
+            </p>
+            <p>
+                Image:
+                <input type="file" name="img" />
+            </p>
+            <input type="submit" value="Add user" />
+        </div>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    var firstName = Request.Params["firstName"];
+    var lastName = Request.Params["lastName"];
+    var patronymic = Request.Params["patronymic"];
+    var dateOfBirth = DateTime.Parse(Request.Params["dateOfBirth"]);
+
+    var user = new User(firstName, lastName, patronymic, dateOfBirth);
+    userLogic.Add(user);
+
+    var image = WebImage.GetImageFromRequest();
+    if (image != null)
+    {
+        image.Resize(50, 50, true, false);
+        userLogic.AddImage(user.Id, image.GetBytes());
+    }
+
+    <script>alert('User successfully added');</script>
+}

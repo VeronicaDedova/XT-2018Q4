@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Page.Title</title>
+</head>
+<body>
+    <div>
+        <a href="~/">Home</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <a>Admin @User.Identity.Name</a>
+            }
+            if (User.IsInRole("User"))
+            {
+                <a>User @User.Identity.Name</a>
+            }
+            <a href="~/auth/LogOut">LogOut</a>
+        }
+        else
+        {
+            <a href="~/auth/LogIn">LogIn</a>
+            <a href="~/auth/Registration.cshtml">Registration</a>
+        }
+
+        @RenderBody()
+    </div>
+</body>
+</html>

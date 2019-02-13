@@ -1,0 +1,60 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var awardLogic = DependencyResolver.AwardLogic;
+    var linkLogic = DependencyResolver.LinkTableLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post">
+        <div>
+            <h3>Which award do you want to delete?</h3>
+            <p>
+                Enter ID deleted award:
+                <input type="number" name="idAward" />
+            </p>
+            <input type="submit" value="Delete award" onclick="return deleteAward();" />
+        </div>
+        <script>
+            function deleteAward() {
+                {
+                    return confirm("Do you want to remove this award from all users?");
+                }
+            }
+        </script>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    var idAward = int.Parse(Request.Params["idAward"]);
+
+    if (awardLogic.TryGetId(idAward))
+    {
+        awardLogic.Delete(idAward);
+        linkLogic.Delete(idAward);
+        awardLogic.DeleteImage(idAward);
+        <script>alert('Award successfully deleted');</script>
+    }
+    else
+    {
+        <div><p>No award with such ID</p></div>
+    }
+}

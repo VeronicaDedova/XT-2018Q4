@@ -1,0 +1,51 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var linkLogic = DependencyResolver.LinkTableLogic;
+    var awardLogic = DependencyResolver.AwardLogic;
+    var userLogic = DependencyResolver.UserLogic;
+
+    if (!(User.IsInRole("Admin") || User.IsInRole("User")))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <table border="1">
+        <caption>List of all users and their awards</caption>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Patronymic</th>
+            <th>Date of birth</th>
+            <th>Age</th>
+            <th>Title</th>
+        </tr>
+        @foreach (var usersAndAwards in linkLogic.GetAll())
+        {
+            <tr>
+                <td>@userLogic.GetById(usersAndAwards.IdUser).Id</td>
+                <td>@userLogic.GetById(usersAndAwards.IdUser).FirstName</td>
+                <td>@userLogic.GetById(usersAndAwards.IdUser).LastName</td>
+                <td>@userLogic.GetById(usersAndAwards.IdUser).Patronymic</td>
+                <td>@userLogic.GetById(usersAndAwards.IdUser).DateOfBirth.ToShortDateString()</td>
+                <td>@userLogic.GetById(usersAndAwards.IdUser).Age</td>
+                <td>@awardLogic.GetById(usersAndAwards.IdAward).Title</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

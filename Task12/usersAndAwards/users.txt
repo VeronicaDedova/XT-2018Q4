@@ -1,0 +1,4 @@
+1 Vyacheslav Andreevich Emcov 10.12.1990 28
+2 Veronika Vadimovna Dedova 06.03.1995 23
+3 Artem Drozdev Stanislavovich 20.11.1995 23
+4 Smurigin Egor Olegovich 15.08.1995 23

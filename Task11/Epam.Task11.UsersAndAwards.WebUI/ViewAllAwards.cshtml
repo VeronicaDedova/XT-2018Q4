@@ -1,0 +1,43 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var awardLogic = DependencyResolver.AwardLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <caption>List of all awards</caption>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Title</th>
+            </tr>
+            @foreach (var award in awardLogic.GetAll())
+            {
+                <tr>
+                    <td>@award.Id</td>
+                    <td><img src="@Epam.Task11.UsersAndAwards.WebUI.Img.GetAwardImage(award)" /></td>
+                    <td>@award.Title</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

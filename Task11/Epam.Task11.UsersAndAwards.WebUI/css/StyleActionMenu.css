@@ -1,0 +1,38 @@
+﻿body {
+    background: #2a2a2a;
+}
+
+div {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 16pt;
+    font-family: 'Courier New';
+    color: #ffffff;
+}
+
+input {
+    font-size: 16pt;
+    font-family: 'Courier New';
+    color: #ffffff;
+    background: #363636;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #ffffff;
+    font-size: 16pt;
+    font-family: 'Courier New';
+    color: #ffffff;
+    margin: 0 -35%;
+}
+
+th, td {
+    padding: 10px;
+}
+
+li {
+    padding-top: 10px;
+    text-align: left;
+}

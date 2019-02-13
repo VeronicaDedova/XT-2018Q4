@@ -1,0 +1,69 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var linkLogic = DependencyResolver.LinkTableLogic;
+    var awardLogic = DependencyResolver.AwardLogic;
+    var userLogic = DependencyResolver.UserLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post">
+        <div>
+            <h3>Enter the ID of the user you want to reward and the ID of the award:</h3>
+            <p>
+                User ID:
+                <input type="number" name="idUser" />
+            </p>
+            <p>
+                Award ID:
+                <input type="number" name="idAward" />
+            </p>
+            <input type="submit" value="Add" />
+        </div>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    var userAward = new LinkTable();
+
+    var idUser = int.Parse(Request.Params["idUser"]);
+    var idAward = int.Parse(Request.Params["idAward"]);
+
+    if (userLogic.TryGetId(idUser))
+    {
+        userAward.IdUser = idUser;
+
+        if (awardLogic.TryGetId(idAward))
+        {
+            userAward.IdAward = idAward;
+            linkLogic.Add(userAward);
+            <script>alert('Award successfully added to user');</script>
+        }
+        else
+        {
+            <div><p>No award with such ID</p></div>
+        }
+    }
+    else
+    {
+        <div><p>No user with such ID</p></div>
+    }
+}

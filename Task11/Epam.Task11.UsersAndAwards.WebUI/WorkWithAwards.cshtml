@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    if(!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <button onclick="Redirect('AddAward');">Add award</button><br />
+        <button onclick="Redirect('UpdateAward');">Update award</button><br />
+        <button onclick="Redirect('DeleteAward');">Delete award</button><br />
+        <button onclick="Redirect('ViewAwardByID');">View award by id</button><br />
+        <button onclick="Redirect('ViewAllAwards');">View all awards</button><br />
+    </div>
+    <script src="~/js/Script.js"></script>
+</body>
+</html>

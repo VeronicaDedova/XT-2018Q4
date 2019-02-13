@@ -1,0 +1,81 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var userLogic = DependencyResolver.UserLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <div>
+            <h3>About user you want update:</h3>
+            <p>
+                User ID:
+                <input type="number" name="idUser" />
+            </p>
+            <p>
+                New first name:
+                <input type="text" name="firstName"/>
+            </p>
+            <p>
+                New last name:
+                <input type="text" name="lastName" />
+            </p>
+            <p>
+                New patronymic:
+                <input type="text" name="patronymic" />
+            </p>
+            <p>
+                New date of birth:
+                <input type="date" name="dateOfBirth" />
+            </p>
+            <p>
+                New image:
+                <input type="file" name="image" />
+            </p>
+            <input type="submit" value="Update user" />
+        </div>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    var idUser = int.Parse(Request.Params["idUser"]);
+    var firstName = Request.Params["firstName"];
+    var lastName = Request.Params["lastName"];
+    var patronymic = Request.Params["patronymic"];
+    var dateOfBirth = DateTime.Parse(Request.Params["dateOfBirth"]);
+
+    var user = new User(firstName, lastName, patronymic, dateOfBirth);
+    userLogic.Update(idUser, user);
+
+    var image = WebImage.GetImageFromRequest();
+    if (image != null)
+    {
+        image.Resize(50, 50, true, false);
+        userLogic.AddImage(user.Id, image.GetBytes());
+    }
+    else
+    {
+        userLogic.DeleteImage(user.Id);
+    }
+
+    <script>alert('User successfully updated');</script>
+}
+

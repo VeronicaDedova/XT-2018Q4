@@ -1,0 +1,64 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var userLogic = DependencyResolver.UserLogic;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post">
+        <div>
+            <h3>Which user do you want to view?</h3>
+            <p>
+                Enter ID:
+                <input type="number" name="idUser" />
+            </p>
+            <input type="submit" value="Show user" />
+        </div>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    int.TryParse(Request.Params["idUser"], out var idUser);
+    var user = userLogic.GetById(idUser);
+    if (user != null)
+    {
+        <table border="1">
+            <caption>User:</caption>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Patronymic</th>
+                <th>Date of birth</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>@user.Id</td>
+                <td><img src="@Epam.Task11.UsersAndAwards.WebUI.Img.GetUserImage(user)" /></td>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Patronymic</td>
+                <td>@user.DateOfBirth.ToShortDateString()</td>
+                <td>@user.Age</td>
+            </tr>
+        </table>
+    }
+    else
+    {
+        <div><p>No user with such ID</p></div>
+    }
+}

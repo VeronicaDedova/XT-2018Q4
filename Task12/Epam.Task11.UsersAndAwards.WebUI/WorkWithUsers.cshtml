@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <button onclick="Redirect('ViewUserByID');">View user by id</button><br />
+        <button onclick="Redirect('ViewAllUsers');">View all users</button><br />
+        @if (User.IsInRole("Admin"))
+        {
+            <button onclick="Redirect('AddUser');">Add user</button><br />
+            <button onclick="Redirect('UpdateUser');">Update user</button><br />
+            <button onclick="Redirect('DeleteUser');">Delete user</button><br />
+            <button onclick="Redirect('GiveAwardToUser');">Give a reward to the user</button><br />
+        }
+
+        @if (User.IsInRole("User") || User.IsInRole("Admin"))
+        {
+            <button onclick="Redirect('ShowUsersAndAwards');">View all users and their awards</button><br />
+        }
+
+    </div>
+    <script src="~/js/Script.js"></script>
+</body>
+</html>

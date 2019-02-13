@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleMenu.css" rel="stylesheet" />
+    <title>Users and awards</title>
+</head>
+<body>
+    <div>
+        <button onclick="Redirect('WorkWithUsers');">List of users</button><br />
+        @if (User.IsInRole("Admin"))
+        {
+            <button onclick="Redirect('WorkWithAwards');">List of awards</button>
+        }
+        тест: админ - логин: Nika, пароль: 123<br />
+        юзер - логин: Slava, пароль 123
+
+    </div>
+    <script src="~/js/Script.js"></script>
+</body>
+</html>

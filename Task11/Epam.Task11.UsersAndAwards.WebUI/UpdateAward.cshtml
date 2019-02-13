@@ -1,0 +1,65 @@
+﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
+@using Epam.Task7.UsersAndAwards.Common;
+@using Epam.Task7.UsersAndAwards.Entities;
+
+@{
+    Layout = "~/_Layout.cshtml";
+    var awardLogic = DependencyResolver.AwardLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <div>
+            <h3>About award you want update:</h3>
+            <p>
+                Award ID:
+                <input type="number" name="idAward" />
+            </p>
+            <p>
+                New title:
+                <input type="text" name="title" />
+            </p>
+            <p>
+                New image:
+                <input type="file" name="image" />
+            </p>
+            <input type="submit" value="Update award" />
+        </div>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    var idAward = int.Parse(Request.Params["idAward"]);
+    var title = Request.Params["title"];
+
+    var award = new Award(title);
+    awardLogic.Update(idAward, award);
+
+    var image = WebImage.GetImageFromRequest();
+    if (image != null)
+    {
+        image.Resize(50, 50, true, false);
+        awardLogic.AddImage(award.Id, image.GetBytes());
+    }
+    else
+    {
+        awardLogic.DeleteImage(award.Id);
+    }
+
+    <script>alert('Award successfully updated');</script>
+}
