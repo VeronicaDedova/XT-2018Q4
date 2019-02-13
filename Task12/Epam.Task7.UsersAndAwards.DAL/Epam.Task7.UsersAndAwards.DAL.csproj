@@ -46,7 +46,7 @@
     <Compile Include="AwardSqlDao.cs" />
     <Compile Include="LinkTableDao.cs" />
     <Compile Include="LinkTableSqlDao.cs" />
-    <Compile Include="UserAccountDao.cs" />
+    <Compile Include="UserAccountSqlDao.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserSqlDao.cs" />

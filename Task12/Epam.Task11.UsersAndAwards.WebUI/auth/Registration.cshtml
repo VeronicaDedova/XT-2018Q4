@@ -1,9 +1,32 @@
-﻿@{
+﻿@using Epam.Task7.UsersAndAwards.Common;
+
+@{
     Layout = "~/_Layout.cshtml";
 
-    var email = Request.Params["email"];
+    if (User.IsInRole("User") || User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+
+    var userAccountLogic = DependencyResolver.UserAccountLogic;
+
     var userName = Request.Params["userName"];
     var password = Request.Params["password"];
+}
+
+@if (IsPost)
+{
+    password = Epam.Task11.UsersAndAwards.WebUI.Cs.ForPassword.SHA256(Request["password"]);
+
+    if (userAccountLogic.UniqName(Request["userName"]))
+    {
+        userAccountLogic.Registration(userName, password);
+        FormsAuthentication.SetAuthCookie(userName, createPersistentCookie: false);
+
+        Response.Redirect("~");
+    }
+
+    Response.Redirect("~/auth/Registration");
 }
 
 <!DOCTYPE html>
@@ -19,10 +42,6 @@
         <div>
             <p>Registration:</p>
             <ul>
-                <li>
-                    <label for="email">E-mail: </label>
-                    <input type="email" id="email" name="email" />
-                </li>
                 <li>
                     <label for="userName">User name: </label>
                     <input type="text" id="userName" name="userName" /><br />

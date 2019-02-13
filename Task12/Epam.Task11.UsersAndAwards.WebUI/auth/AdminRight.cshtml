@@ -1,0 +1,62 @@
+﻿@using Epam.Task7.UsersAndAwards.Common;
+
+@{
+    Layout = "~/_Layout.cshtml";
+
+    var userAccountLogic = DependencyResolver.UserAccountLogic;
+
+    if (!User.IsInRole("Admin"))
+    {
+        Response.Redirect("~");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/StyleActionMenu.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form method="post">
+        <div>
+            <label>User name</label>
+            <input type="text" name="userName" />
+            <p><input type="radio" name="appoint" value="appoint" checked />Appoint admin</p>
+            <p><input type="radio" name="appoint" value="remove" />Remove admin</p>
+            <input type="submit" value="Ok" />
+        </div>
+        <div>
+            <h3>All users:</h3>
+            @foreach (var user in userAccountLogic.GetAll())
+            {
+                <ul>
+                    <li>@user.UserName - @user.Role</li>
+                </ul>
+            }
+        </div>
+    </form>
+</body>
+</html>
+
+@if (IsPost)
+{
+    var selected = Request.Form["appoint"].ToString();
+
+    if (selected == "appoint")
+    {
+        userAccountLogic.AppointAdmin(Request.Params["userName"]);
+        Response.Redirect("~/auth/AdminRight");
+    }
+    else if (selected == "remove")
+    {
+        userAccountLogic.RemoveAdmin(Request.Params["userName"]);
+        Response.Redirect("~/auth/AdminRight");
+    }
+    else
+    {
+        <script>alert('Error');</script>
+    }
+}

@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Epam.Task7.UsersAndAwards.DAL.Interface;
 using Epam.Task7.UsersAndAwards.Entities;
 
@@ -44,7 +41,7 @@ namespace Epam.Task7.UsersAndAwards.DAL
         }
 
         public bool Delete(int id)
-        {            
+        {
             RepositoryUsers.Remove(id);
 
             var afterDelete = RepositoryUsers.Values.Select(x => x.ToString()).ToArray();

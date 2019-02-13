@@ -1,17 +1,31 @@
-﻿@if (IsPost)
-{
-    var user = Request["userName"];
-    var password = Request["password"];
+﻿@using Epam.Task7.UsersAndAwards.Common;
 
-    if (user != "" && password != "")
+@{
+    Layout = "~/_Layout.cshtml";
+
+    if (User.IsInRole("User") || User.IsInRole("Admin"))
     {
-        FormsAuthentication.SetAuthCookie(user, createPersistentCookie: true);
+        Response.Redirect("~");
+    }
+
+    var userAccountLogic = DependencyResolver.UserAccountLogic;
+}
+
+@if (IsPost)
+{
+    var userName = Request["userName"];
+    var password = Epam.Task11.UsersAndAwards.WebUI.Cs.ForPassword.SHA256(Request["password"]);
+
+    if (userAccountLogic.Login(userName, password))
+    {
+        FormsAuthentication.SetAuthCookie(userName, createPersistentCookie: true);
     }
     else
     {
-        Response.Redirect("~/LogIn");
+        Response.Redirect("~/auth/LogIn");
         return;
     }
+
     Response.Redirect("~");
     return;
 }

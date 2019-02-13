@@ -1,9 +1,8 @@
-﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
-@using Epam.Task7.UsersAndAwards.Common;
-@using Epam.Task7.UsersAndAwards.Entities;
+﻿@using Epam.Task7.UsersAndAwards.Common;
 
 @{
     Layout = "~/_Layout.cshtml";
+
     var awardLogic = DependencyResolver.AwardLogic;
 
     if (!User.IsInRole("Admin"))

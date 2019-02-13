@@ -12,13 +12,15 @@
         {
             if (User.IsInRole("Admin"))
             {
-                <a>Admin @User.Identity.Name</a>
+                <a>Hello, Admin @User.Identity.Name :)</a>
+                <a href="~/auth/LogOut">LogOut</a><br />
+                <a href="~/auth/AdminRight.cshtml">User management</a>
             }
             if (User.IsInRole("User"))
             {
-                <a>User @User.Identity.Name</a>
+                <a>Hello, User @User.Identity.Name :)</a>
+                <a href="~/auth/LogOut">LogOut</a>
             }
-            <a href="~/auth/LogOut">LogOut</a>
         }
         else
         {

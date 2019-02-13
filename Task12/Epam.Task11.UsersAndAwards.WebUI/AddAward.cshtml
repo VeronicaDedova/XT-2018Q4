@@ -1,9 +1,9 @@
-﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
-@using Epam.Task7.UsersAndAwards.Common;
+﻿@using Epam.Task7.UsersAndAwards.Common;
 @using Epam.Task7.UsersAndAwards.Entities;
 
 @{
     Layout = "~/_Layout.cshtml";
+
     var awardLogic = DependencyResolver.AwardLogic;
 
     if (!User.IsInRole("Admin"))
@@ -32,7 +32,7 @@
                 Image:
                 <input type="file" name="img" />
             </p>
-            <input type="submit" value="Add award" />
+            <input type="submit" value="Add award" class="submit" />
         </div>
     </form>
 </body>
@@ -43,9 +43,11 @@
     var title = Request.Params["title"];
 
     var award = new Award(title);
+
     awardLogic.Add(award);
 
     var image = WebImage.GetImageFromRequest();
+
     if (image != null)
     {
         image.Resize(50, 50, true, false);

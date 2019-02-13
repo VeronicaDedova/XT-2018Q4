@@ -94,7 +94,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cs\Img.cs" />
+    <Compile Include="Cs\ForPassword.cs" />
+    <Compile Include="Cs\Img.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MyRoleProvider\MyRoleProvider.cs" />
   </ItemGroup>
@@ -108,6 +109,7 @@
     <Content Include="auth\LogOut.cshtml" />
     <Content Include="auth\LogIn.cshtml" />
     <Content Include="auth\Registration.cshtml" />
+    <Content Include="auth\AdminRight.cshtml" />
     <None Include="packages.config" />
     <Content Include="ViewUserByID.cshtml" />
     <Content Include="ViewAllUsers.cshtml" />

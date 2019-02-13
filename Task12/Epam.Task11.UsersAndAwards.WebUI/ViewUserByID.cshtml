@@ -1,9 +1,8 @@
-﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
-@using Epam.Task7.UsersAndAwards.Common;
-@using Epam.Task7.UsersAndAwards.Entities;
+﻿@using Epam.Task7.UsersAndAwards.Common;
 
 @{
     Layout = "~/_Layout.cshtml";
+
     var userLogic = DependencyResolver.UserLogic;
 }
 
@@ -33,9 +32,10 @@
 {
     int.TryParse(Request.Params["idUser"], out var idUser);
     var user = userLogic.GetById(idUser);
+
     if (user != null)
     {
-        <table border="1">
+        <table border="1" class="user">
             <caption>User:</caption>
             <tr>
                 <th>ID</th>

@@ -25,6 +25,10 @@ table {
     font-size: 16pt;
     font-family: 'Courier New';
     color: #ffffff;
+    margin: 0 auto;
+}
+
+.user {
     margin: 0 -35%;
 }
 

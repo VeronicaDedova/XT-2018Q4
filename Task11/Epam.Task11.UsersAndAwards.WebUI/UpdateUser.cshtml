@@ -1,9 +1,9 @@
-﻿@using Epam.Task7.UsersAndAwards.BLL.Interface;
-@using Epam.Task7.UsersAndAwards.Common;
+﻿@using Epam.Task7.UsersAndAwards.Common;
 @using Epam.Task7.UsersAndAwards.Entities;
 
 @{
     Layout = "~/_Layout.cshtml";
+
     var userLogic = DependencyResolver.UserLogic;
 
     if (!User.IsInRole("Admin"))
@@ -30,7 +30,7 @@
             </p>
             <p>
                 New first name:
-                <input type="text" name="firstName"/>
+                <input type="text" name="firstName" />
             </p>
             <p>
                 New last name:

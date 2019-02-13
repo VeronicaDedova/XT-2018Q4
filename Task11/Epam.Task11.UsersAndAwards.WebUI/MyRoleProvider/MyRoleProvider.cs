@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Security;
+using Epam.Task7.UsersAndAwards.BLL.Interface;
+using Epam.Task7.UsersAndAwards.Common;
 
 namespace Epam.Task11.UsersAndAwards.WebUI.MyRoleProvider
 {
     public class MyRoleProvider : RoleProvider
     {
+        private IUserAccountLogic userAccountLogic = DependencyResolver.UserAccountLogic;
+
         public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override bool IsUserInRole(string username, string roleName)
@@ -27,13 +28,7 @@ namespace Epam.Task11.UsersAndAwards.WebUI.MyRoleProvider
 
         public override string[] GetRolesForUser(string username)
         {
-            switch (username)
-            {
-                case "Nika":
-                    return new[] { "Admin" };
-                default:
-                    return new[] { "User" };
-            }
+            return this.userAccountLogic.GetRolesForUsers(username);
         }
 
         #region NotImplemented

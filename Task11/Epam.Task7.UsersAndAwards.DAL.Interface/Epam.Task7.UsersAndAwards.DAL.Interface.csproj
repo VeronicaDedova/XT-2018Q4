@@ -45,5 +45,11 @@
     <Compile Include="IUserAccountDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.Task7.UsersAndAwards.Entities\Epam.Task7.UsersAndAwards.Entities.csproj">
+      <Project>{3128D8D1-7DEB-411D-821A-4A28EDE03129}</Project>
+      <Name>Epam.Task7.UsersAndAwards.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
